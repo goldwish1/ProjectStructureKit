@@ -1,0 +1,59 @@
+{
+  "Climb": "mdc",
+  "moves": [
+    {
+      "status": "complete",
+      "description": "检查CLI工具相关的代码位置",
+      "details": "在开始删除之前，需要确认CLI工具的代码位置，确保不会误删",
+      "rest": true
+    },
+    {
+      "status": "complete",
+      "description": "移除Swift Package相关文件",
+      "details": "删除Package.swift和Package.resolved文件"
+    },
+    {
+      "status": "complete",
+      "description": "移除Sources目录",
+      "details": "确认Sources目录中是否只包含SDK相关代码，如果是则删除"
+    },
+    {
+      "status": "complete",
+      "description": "移除Tests目录",
+      "details": "确认Tests目录中是否只包含SDK测试，如果是则删除"
+    },
+    {
+      "status": "complete",
+      "description": "移除Example目录",
+      "details": "确认Example目录是否为SDK示例，如果是则删除",
+      "rest": true
+    },
+    {
+      "status": "complete",
+      "description": "更新package.json",
+      "details": "移除与SDK相关的依赖和配置，更新版本号"
+    },
+    {
+      "status": "complete",
+      "description": "更新README.md第一部分",
+      "details": "重写项目简介和CLI工具使用说明部分"
+    },
+    {
+      "status": "complete",
+      "description": "更新README.md第二部分",
+      "details": "更新配置文件说明和常见问题部分",
+      "rest": true
+    },
+    {
+      "status": "complete",
+      "description": "清理其他配置文件",
+      "details": "检查并清理其他可能包含SDK相关配置的文件"
+    },
+    {
+      "status": "complete",
+      "description": "验证CLI功能",
+      "details": "测试所有CLI命令是否正常工作",
+      "rest": true
+    }
+  ]
+} 

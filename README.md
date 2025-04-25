@@ -1,39 +1,28 @@
-# ProjectStructureKit
+# treeskit
 
-ProjectStructureKit 是一个强大的工具集，用于自动生成和维护iOS项目结构文档。它包含两个主要组件：
-1. Swift Package SDK - 用于在代码中集成和使用
-2. CLI 工具 - 用于命令行操作和自动化
+treeskit 是一个命令行工具，用于自动生成和维护iOS项目结构文档。它提供了简单直观的命令行界面，帮助开发者轻松管理项目文档。
 
-## SDK 功能特点
+## 功能特点
 
 - 自动生成项目结构文档
 - 支持自定义忽略文件/目录
 - 灵活的文档格式化选项
 - Git hooks自动更新支持
-- 异步API支持
-- iOS 13.0+ 支持
+- 简单易用的命令行界面
 
-## 安装
+## 环境要求
 
-### Swift Package Manager
+### 必需组件
+- Node.js >= 14.0.0
+- npm >= 6.0.0
+- tree命令行工具
 
-将以下依赖添加到你的 `Package.swift` 文件中：
+### 操作系统支持
+- macOS
+- Linux
+- Windows (需要额外配置)
 
-```swift
-dependencies: [
-    .package(url: "your-repository-url", from: "1.0.0")
-]
-```
-
-### CocoaPods
-
-将以下内容添加到你的 Podfile 中：
-
-```ruby
-pod 'ProjectStructureKit', '~> 1.0'
-```
-
-## CLI 工具使用
+## 使用方法
 
 无需安装，直接通过 `npx` 运行：
 
@@ -42,7 +31,7 @@ pod 'ProjectStructureKit', '~> 1.0'
 npx treeskit <命令>
 ```
 
-例如：
+### 可用命令
 
 ```bash
 # 初始化项目
@@ -55,67 +44,55 @@ npx treeskit generate [--output <path>]
 npx treeskit config
 ```
 
-这种方式的优点是：
-- 无需全局安装，不污染用户环境
-- 总是使用最新版本
-- 一次性执行，不占用本地空间
+### 命令详细说明
 
-## SDK 快速开始
+1. **init**
+   - 初始化项目配置
+   - 创建默认的配置文件
+   - 设置Git hooks（可选）
 
-```swift
-import ProjectStructureKit
+   交互式配置项：
+   - 项目名称（必填）
+   - Git Hooks启用状态（可选，默认：是）
 
-// 创建配置
-let config = ProjectStructureKit.Configuration(
-    ignoredPaths: [".git", "Pods"],
-    outputPath: "docs/STRUCTURE.md",
-    updateTriggers: [.gitCommit, .gitPush]
-)
+   示例：
+   ```bash
+   $ npx treeskit init
+   ? 请输入项目名称: MyApp
+   ? 是否启用Git Hooks来自动更新文档? Yes
+   ✓ 配置文件已创建
+   ✓ Git Hooks已配置
+   ```
 
-// 初始化
-let kit = ProjectStructureKit(configuration: config)
+2. **generate**
+   - 生成项目结构文档
+   - 支持自定义输出路径
+   - 可选择是否包含文件大小和行数信息
 
-// 生成文档
-try await kit.generateDocumentation()
+   选项：
+   - `-o, --output <path>` - 指定文档输出路径（默认：docs）
 
-// 设置git hooks
-try kit.setupGitHooks()
-```
+   示例：
+   ```bash
+   # 使用默认输出路径
+   $ npx treeskit generate
 
-## 配置选项
+   # 指定输出路径
+   $ npx treeskit generate -o ./docs/structure
+   ```
 
-### SDK 配置
+3. **config**
+   - 管理工具配置
+   - 设置忽略规则
+   - 配置文档格式
 
-```swift
-// 忽略路径
-let config = ProjectStructureKit.Configuration(
-    ignoredPaths: [
-        ".git",
-        "Pods",
-        "*.xcodeproj",
-        "build"
-    ]
-)
+   配置项：
+   - 项目名称：项目的显示名称
+   - 输出路径：文档生成位置（默认：docs）
+   - Git Hooks：是否启用自动更新（默认：true）
+   - 忽略路径：不包含在文档中的路径
 
-// 格式化选项
-let formatOptions = ProjectStructureKit.FormatOptions(
-    includeFileSize: true,
-    includeLineCount: true,
-    maxDepth: 3
-)
-
-// 更新触发器
-let config = ProjectStructureKit.Configuration(
-    updateTriggers: [
-        .manual,
-        .gitCommit,
-        .gitPush,
-        .custom { /* 自定义触发条件 */ }
-    ]
-)
-```
-
-### CLI 配置文件
+## 配置文件
 
 `.projectstructure.json` 配置文件结构：
 
@@ -129,8 +106,43 @@ let config = ProjectStructureKit.Configuration(
     ".git",
     "build",
     "DerivedData"
-  ]
+  ],
+  "format": {
+    "includeFileSize": true,
+    "includeLineCount": true,
+    "maxDepth": 3
+  }
 }
+```
+
+### 配置项说明
+
+- **projectName**: 项目名称，将显示在生成的文档中
+- **useGitHooks**: 是否启用Git hooks自动更新功能
+- **outputPath**: 文档输出路径
+- **ignorePaths**: 需要忽略的文件或目录列表
+- **format**: 文档格式化选项
+  - **includeFileSize**: 是否包含文件大小信息
+  - **includeLineCount**: 是否包含文件行数信息
+  - **maxDepth**: 目录结构最大深度
+
+## 错误处理
+
+### 常见错误码
+- `ENOENT`: 文件或目录不存在
+- `EACCES`: 权限不足
+- `EINVAL`: 无效的参数
+
+### 错误信息示例
+```bash
+# 配置文件不存在
+Error: 未找到配置文件，请先运行 npx treeskit init
+
+# 输出目录无写入权限
+Error: 无法写入文档，请检查目录权限
+
+# tree命令未安装
+Error: 未找到tree命令，请先安装
 ```
 
 ## 最佳实践
@@ -179,8 +191,8 @@ MIT
 
 ## 更新日志
 
-### v1.0.0
-- SDK 和 CLI 工具初始版本发布
-- 支持基本的文档生成功能
-- 支持Git Hooks自动更新
-- 提供完整的配置管理
+### v2.0.0
+- 移除SDK相关功能，专注于CLI工具
+- 优化命令行界面和用户体验
+- 更新文档和配置选项
+- 简化项目结构

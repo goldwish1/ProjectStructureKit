@@ -1,7 +1,7 @@
 {
   "name": "treeskit",
-  "version": "1.0.4",
-  "description": "CLI tool for ProjectStructureKit - iOS project structure documentation generator",
+  "version": "2.0.0",
+  "description": "CLI tool for generating and maintaining iOS project structure documentation",
   "main": "bin/cli.js",
   "bin": {
     "treeskit": "bin/cli.js"
@@ -18,8 +18,6 @@
     "project-structure",
     "documentation",
     "cli",
-    "swift",
-    "xcode",
     "generator"
   ],
   "author": "",
@@ -44,7 +42,6 @@
   "files": [
     "bin/",
     "src/",
-    "docs/",
     "LICENSE",
     "README.md"
   ]
