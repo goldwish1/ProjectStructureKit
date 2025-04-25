@@ -1,10 +1,10 @@
 {
   "name": "treeskit",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "CLI tool for ProjectStructureKit - iOS project structure documentation generator",
   "main": "bin/cli.js",
   "bin": {
-    "treeskit": "./bin/cli.js"
+    "treeskit": "bin/cli.js"
   },
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
@@ -48,4 +48,4 @@
     "LICENSE",
     "README.md"
   ]
-} 
+}

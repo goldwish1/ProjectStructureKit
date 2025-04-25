@@ -1,0 +1,71 @@
+{
+  "Climb": "pK4n",
+  "moves": [
+    {
+      "status": "complete",
+      "description": "创建Swift Package项目结构",
+      "details": "使用Swift Package Manager创建基本项目结构，配置Package.swift文件",
+      "rest": true
+    },
+    {
+      "status": "complete",
+      "description": "实现核心功能类",
+      "details": "实现ProjectStructureGenerator、MarkdownFormatter等核心类",
+      "rest": true
+    },
+    {
+      "status": "complete",
+      "description": "实现配置系统",
+      "details": "实现Configuration结构体和ConfigurationManager类",
+      "rest": true
+    },
+    {
+      "status": "complete",
+      "description": "实现Git Hooks管理",
+      "details": "实现GitHooksManager类，处理git hooks的创建和管理",
+      "rest": true
+    },
+    {
+      "status": "complete",
+      "description": "编写单元测试",
+      "details": "为所有核心功能编写单元测试，确保测试覆盖率",
+      "rest": true
+    },
+    {
+      "status": "complete",
+      "description": "创建示例项目",
+      "details": "创建一个示例iOS项目，展示ProjectStructureKit的使用方法",
+      "rest": true
+    },
+    {
+      "status": "complete",
+      "description": "编写文档",
+      "details": "编写README、API文档和使用指南",
+      "rest": true
+    },
+    {
+      "status": "complete",
+      "description": "创建Node.js项目结构",
+      "details": "初始化package.json，设置CLI工具的基本结构",
+      "rest": true
+    },
+    {
+      "status": "complete",
+      "description": "实现CLI命令行接口",
+      "details": "使用Commander.js实现命令行接口，支持各种命令和选项",
+      "rest": true
+    },
+    {
+      "status": "complete",
+      "description": "编写CLI文档",
+      "details": "编写CLI使用文档，包括命令参考和示例",
+      "rest": true
+    },
+    {
+      "status": "complete",
+      "description": "发布准备",
+      "details": "准备npm发布配置，完善版本信息",
+      "rest": true
+    }
+  ]
+} 
