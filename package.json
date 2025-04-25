@@ -1,0 +1,51 @@
+{
+  "name": "project-structure-kit-cli",
+  "version": "1.0.0",
+  "description": "CLI tool for ProjectStructureKit - iOS project structure documentation generator",
+  "main": "bin/cli.js",
+  "bin": {
+    "project-structure": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "npm run test",
+    "prepublishOnly": "npm test",
+    "version": "git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "keywords": [
+    "ios",
+    "project-structure",
+    "documentation",
+    "cli",
+    "swift",
+    "xcode",
+    "generator"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^11.0.0",
+    "chalk": "^4.1.2",
+    "inquirer": "^8.2.5"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/project-structure-kit-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/project-structure-kit-cli/issues"
+  },
+  "homepage": "https://github.com/yourusername/project-structure-kit-cli#readme",
+  "files": [
+    "bin/",
+    "src/",
+    "docs/",
+    "LICENSE",
+    "README.md"
+  ]
+} 

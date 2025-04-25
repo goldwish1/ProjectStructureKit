@@ -1,0 +1,49 @@
+# 开发文件
+.git
+.gitignore
+.DS_Store
+.editorconfig
+.eslintrc
+.prettierrc
+.vscode/
+.idea/
+
+# 测试文件
+test/
+__tests__/
+coverage/
+*.test.js
+*.spec.js
+
+# 构建文件
+build/
+dist/
+tmp/
+
+# 文档源文件
+docs/src/
+docs/drafts/
+
+# 开发工具配置
+.travis.yml
+.circleci/
+.github/
+.husky/
+
+# 依赖目录
+node_modules/
+
+# 日志文件
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 环境配置
+.env
+.env.*
+
+# 其他
+*.tgz
+.npmrc
+.yarnrc 
