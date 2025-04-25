@@ -1,13 +1,13 @@
 {
-  "name": "project-structure-kit-cli",
+  "name": "treeskit",
   "version": "1.0.0",
   "description": "CLI tool for ProjectStructureKit - iOS project structure documentation generator",
   "main": "bin/cli.js",
   "bin": {
-    "project-structure": "./bin/cli.js"
+    "treeskit": "./bin/cli.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"No test specified\" && exit 0",
     "prepare": "npm run test",
     "prepublishOnly": "npm test",
     "version": "git add -A src",
@@ -35,12 +35,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/project-structure-kit-cli.git"
+    "url": "git+https://github.com/yourusername/treeskit.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/project-structure-kit-cli/issues"
+    "url": "https://github.com/yourusername/treeskit/issues"
   },
-  "homepage": "https://github.com/yourusername/project-structure-kit-cli#readme",
+  "homepage": "https://github.com/yourusername/treeskit#readme",
   "files": [
     "bin/",
     "src/",
