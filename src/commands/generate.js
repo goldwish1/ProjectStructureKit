@@ -13,6 +13,41 @@ async function loadConfig() {
   }
 }
 
+async function getDirectoryDescription(dir) {
+  switch(dir.toLowerCase()) {
+    case 'src':
+    case 'sources':
+      return '源代码目录';
+    case 'tests':
+      return '测试文件目录';
+    case 'resources':
+      return '资源文件目录';
+    case 'docs':
+      return '文档目录';
+    case 'bin':
+      return '可执行文件目录';
+    case 'lib':
+      return '库文件目录';
+    case 'config':
+      return '配置文件目录';
+    case 'scripts':
+      return '脚本文件目录';
+    case 'assets':
+      return '资源文件目录';
+    case 'public':
+      return '公共文件目录';
+    case 'private':
+      return '私有文件目录';
+    case 'vendor':
+      return '第三方依赖目录';
+    case 'dist':
+    case 'build':
+      return '构建输出目录';
+    default:
+      return null;
+  }
+}
+
 async function generateDocumentation(options) {
   try {
     const config = await loadConfig();
@@ -28,6 +63,24 @@ async function generateDocumentation(options) {
       encoding: 'utf8'
     });
 
+    // 获取一级目录列表
+    const rootDirs = execSync('ls -d */ 2>/dev/null || true', { encoding: 'utf8' })
+      .trim()
+      .split('\n')
+      .filter(Boolean)
+      .map(dir => dir.replace('/', ''));
+
+    // 生成目录说明
+    const directoryDescriptions = await Promise.all(
+      rootDirs.map(async dir => {
+        const desc = await getDirectoryDescription(dir);
+        return desc ? `- \`${dir}/\`: ${desc}` : null;
+      })
+    );
+
+    // 过滤掉没有描述的目录
+    const validDescriptions = directoryDescriptions.filter(Boolean);
+
     // 生成markdown文档
     const markdown = `# ${config.projectName} 项目结构
 
@@ -37,12 +90,11 @@ async function generateDocumentation(options) {
 ${treeOutput}
 \`\`\`
 
+${validDescriptions.length > 0 ? `
 ## 主要目录说明
 
-- \`Sources/\`: 源代码目录
-- \`Tests/\`: 测试文件目录
-- \`Resources/\`: 资源文件目录
-- \`docs/\`: 文档目录
+${validDescriptions.join('\n')}
+` : ''}
 
 > 本文档由 ProjectStructureKit 自动生成
 `;
