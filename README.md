@@ -42,6 +42,9 @@ npx treeskit generate [--output <path>]
 
 # 配置管理
 npx treeskit config
+
+# Git Hooks管理
+npx treeskit hooks <enable|disable|status>
 ```
 
 ### 命令详细说明
@@ -92,6 +95,28 @@ npx treeskit config
    - Git Hooks：是否启用自动更新（默认：true）
    - 忽略路径：不包含在文档中的路径
 
+4. **hooks**
+   - 管理Git Hooks功能
+   - 支持启用/禁用自动更新
+   - 查看当前状态
+
+   子命令：
+   - `enable` - 启用Git Hooks
+   - `disable` - 禁用Git Hooks
+   - `status` - 查看当前状态
+
+   示例：
+   ```bash
+   # 启用Git Hooks
+   $ npx treeskit hooks enable
+
+   # 禁用Git Hooks
+   $ npx treeskit hooks disable
+
+   # 查看状态
+   $ npx treeskit hooks status
+   ```
+
 ## 配置文件
 
 `.projectstructure.json` 配置文件结构：
@@ -126,6 +151,28 @@ npx treeskit config
   - **includeLineCount**: 是否包含文件行数信息
   - **maxDepth**: 目录结构最大深度
 
+## Git Hooks功能
+
+treeskit使用原生Git hooks来实现文档的自动更新。当启用此功能时：
+
+1. **自动更新**
+   - 在每次提交前自动更新文档
+   - 自动将更新后的文档添加到提交中
+
+2. **安全性**
+   - 自动备份现有的pre-commit hook
+   - 在禁用功能时恢复原有hook
+
+3. **灵活控制**
+   - 可随时启用/禁用功能
+   - 支持查看当前状态
+   - 通过配置或命令行管理
+
+4. **错误处理**
+   - 优雅处理非Git仓库情况
+   - 处理权限问题
+   - 提供清晰的错误提示
+
 ## 错误处理
 
 ### 常见错误码
@@ -143,6 +190,10 @@ Error: 无法写入文档，请检查目录权限
 
 # tree命令未安装
 Error: 未找到tree命令，请先安装
+
+# Git相关错误
+Error: 当前目录不是git仓库，请先初始化git
+Error: Git Hooks配置失败，请检查权限
 ```
 
 ## 最佳实践
@@ -159,6 +210,11 @@ Error: 未找到tree命令，请先安装
 3. **文档位置**
    - 建议将文档放在专门的文档目录
    - 确保文档目录被版本控制追踪
+
+4. **Git Hooks管理**
+   - 在项目初始化时决定是否启用
+   - 定期检查hooks状态
+   - 在团队中统一使用状态
 
 ## 常见问题
 
@@ -178,8 +234,19 @@ Error: 未找到tree命令，请先安装
 
 3. **Git Hooks不生效**
    - 确保项目是Git仓库
+   - 检查是否存在其他 Git Hooks 管理工具（如 husky）：
+     ```bash
+     # 检查是否被其他工具接管
+     git config --get core.hooksPath
+     
+     # 如果输出不为空，说明被其他工具接管，需要：
+     # 1. 要么卸载其他工具
+     # 2. 要么执行以下命令恢复原生 hooks：
+     git config --unset core.hooksPath
+     ```
    - 检查 `.git/hooks` 目录权限
-   - 重新运行 `npx treeskit init`
+   - 使用 `treeskit hooks status` 检查状态
+   - 尝试重新启用: `treeskit hooks enable`
 
 ## 许可证
 
@@ -196,3 +263,4 @@ MIT
 - 优化命令行界面和用户体验
 - 更新文档和配置选项
 - 简化项目结构
+- 添加Git Hooks管理命令

@@ -1,13 +1,13 @@
 {
   "name": "treeskit",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "CLI tool for generating and maintaining iOS project structure documentation",
   "main": "bin/cli.js",
   "bin": {
     "treeskit": "bin/cli.js"
   },
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0",
+    "test": "jest",
     "prepare": "npm run test",
     "prepublishOnly": "npm test",
     "version": "git add -A src",
@@ -27,6 +27,10 @@
     "chalk": "^4.1.2",
     "inquirer": "^8.2.5"
   },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "mock-fs": "^5.2.0"
+  },
   "engines": {
     "node": ">=14.0.0",
     "npm": ">=6.0.0"
@@ -44,5 +48,15 @@
     "src/",
     "LICENSE",
     "README.md"
-  ]
+  ],
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": ["<rootDir>/tests/**/*.test.js"],
+    "collectCoverage": true,
+    "coverageDirectory": "coverage",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/tests/"
+    ]
+  }
 }

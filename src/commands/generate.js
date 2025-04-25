@@ -9,7 +9,7 @@ async function loadConfig() {
     const configData = await fs.readFile(configPath, 'utf8');
     return JSON.parse(configData);
   } catch (error) {
-    throw new Error('未找到配置文件，请先运行 project-structure init');
+    throw new Error('未找到配置文件，请先运行 treeskit init');
   }
 }
 
@@ -96,7 +96,7 @@ ${validDescriptions.length > 0 ? `
 ${validDescriptions.join('\n')}
 ` : ''}
 
-> 本文档由 ProjectStructureKit 自动生成
+> 本文档由 treeskit 自动生成
 `;
 
     // 保存文档

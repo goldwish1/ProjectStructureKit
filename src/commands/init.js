@@ -2,11 +2,10 @@ const chalk = require('chalk');
 const inquirer = require('inquirer');
 const fs = require('fs').promises;
 const path = require('path');
-const { execSync } = require('child_process');
+const GitHooksManager = require('../utils/GitHooksManager');
 
 async function initializeProject() {
   try {
-    // 检查是否在iOS项目目录中
     const questions = [
       {
         type: 'input',
@@ -47,29 +46,8 @@ async function initializeProject() {
 
     if (answers.useGitHooks) {
       try {
-        // 安装 husky
-        console.log(chalk.blue('正在安装 husky...'));
-        execSync('npm install husky --save-dev', { stdio: 'inherit' });
-        
-        // 初始化 husky
-        console.log(chalk.blue('正在初始化 husky...'));
-        execSync('npx husky init', { stdio: 'inherit' });
-        
-        // 创建 pre-commit hook 文件
-        console.log(chalk.blue('正在配置 pre-commit hook...'));
-        // 添加 update-docs 脚本到 package.json
-        execSync('npm pkg set scripts.update-docs="project-structure generate"', { stdio: 'inherit' });
-        
-        // 创建 pre-commit hook 文件
-        const hookPath = path.join(process.cwd(), '.husky', 'pre-commit');
-        const hookContent = `#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-npm run update-docs
-git add docs/PROJECT_STRUCTURE.md`;
-        
-        await fs.writeFile(hookPath, hookContent, { mode: 0o755 });
-        
+        const hooksManager = new GitHooksManager(process.cwd());
+        await hooksManager.installHook();
         console.log(chalk.green('✓ Git Hooks已配置'));
       } catch (error) {
         console.error(chalk.yellow('警告: Git Hooks配置失败，请手动配置'), error.message);
@@ -77,8 +55,8 @@ git add docs/PROJECT_STRUCTURE.md`;
     }
 
     console.log(chalk.blue('\n初始化完成！现在您可以使用以下命令：'));
-    console.log(chalk.yellow('\n  project-structure generate') + ' - 生成项目结构文档');
-    console.log(chalk.yellow('  project-structure config') + ' - 修改配置\n');
+    console.log(chalk.yellow('\n  treeskit generate') + ' - 生成项目结构文档');
+    console.log(chalk.yellow('  treeskit config') + ' - 修改配置\n');
 
   } catch (error) {
     console.error(chalk.red('初始化失败：'), error.message);

@@ -1,0 +1,40 @@
+{
+  "Climb": "k4Pj",
+  "moves": [
+    {
+      "status": "complete",
+      "description": "移除husky相关依赖和配置",
+      "details": "从package.json中移除husky依赖，删除.husky目录",
+      "rest": true
+    },
+    {
+      "status": "complete",
+      "description": "创建GitHooksManager类",
+      "details": "实现git hooks的安装、卸载、备份和恢复功能的核心类",
+      "rest": true
+    },
+    {
+      "status": "complete",
+      "description": "修改初始化流程",
+      "details": "更新init命令，集成GitHooksManager，添加hooks选项",
+      "rest": true
+    },
+    {
+      "status": "complete",
+      "description": "添加hooks管理命令",
+      "details": "添加enable-hooks和disable-hooks命令",
+      "rest": true
+    },
+    {
+      "status": "complete",
+      "description": "添加单元测试",
+      "details": "为GitHooksManager和新增的命令添加单元测试"
+    },
+    {
+      "status": "complete",
+      "description": "更新文档",
+      "details": "更新README.md，添加关于git hooks的说明",
+      "rest": true
+    }
+  ]
+} 

@@ -5,6 +5,7 @@ const chalk = require('chalk');
 const init = require('../src/commands/init');
 const generate = require('../src/commands/generate');
 const config = require('../src/commands/config');
+const hooks = require('../src/commands/hooks');
 
 // 版本号从package.json中读取
 const { version } = require('../package.json');
@@ -34,6 +35,13 @@ program
   .command('config')
   .description('管理工具配置')
   .action(config);
+
+// hooks命令
+program
+  .command('hooks')
+  .description('管理Git Hooks')
+  .argument('<action>', '操作类型: enable, disable, status')
+  .action(hooks);
 
 // 解析命令行参数
 program.parse(process.argv); 
