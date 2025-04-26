@@ -2,20 +2,26 @@
 
 treeskit 是一个命令行工具，用于自动生成和维护iOS项目结构文档。它提供了简单直观的命令行界面，帮助开发者轻松管理项目文档。
 
-## 功能特点
+## ⚠️ 重要：前置依赖安装
 
-- 自动生成项目结构文档
-- 支持自定义忽略文件/目录
-- 灵活的文档格式化选项
-- Git hooks自动更新支持
-- 简单易用的命令行界面
+在使用 treeskit 之前，请确保您的系统已安装以下必需组件：
 
-## 环境要求
+1. **Node.js 和 npm**
+   - Node.js >= 14.0.0
+   - npm >= 6.0.0
 
-### 必需组件
-- Node.js >= 14.0.0
-- npm >= 6.0.0
-- tree命令行工具
+2. **tree 命令行工具**（必需）
+   ```bash
+   # 在 macOS 上安装
+   brew install tree
+   
+   # 在 Linux 上安装
+   sudo apt-get install tree  # Ubuntu/Debian
+   sudo yum install tree      # CentOS/RHEL
+   
+   # 验证安装
+   tree --version  # 如果正确安装，会显示版本号
+   ```
 
 ### 操作系统支持
 - macOS
@@ -24,27 +30,56 @@ treeskit 是一个命令行工具，用于自动生成和维护iOS项目结构�
 
 ## 使用方法
 
+treeskit 提供两种使用方式：
+
+### 1. 使用 npx（推荐新手用户）
 无需安装，直接通过 `npx` 运行：
 
 ```bash
 # 使用 npx 直接运行命令
 npx treeskit <命令>
+
+# 例如：
+npx treeskit init
+npx treeskit generate
 ```
+
+### 2. 全局安装（推荐经常使用的用户）
+```bash
+# 全局安装
+npm install -g treeskit
+
+# 安装后可以直接使用命令
+treeskit <命令>
+```
+
+注意：如果遇到 "command not found: treeskit" 错误：
+1. 确保已正确全局安装：`npm install -g treeskit`
+2. 检查 npm 全局路径是否在 PATH 中：
+   ```bash
+   # 查看 npm 全局安装路径
+   npm config get prefix
+   
+   # 确保该路径在 PATH 环境变量中
+   echo $PATH
+   ```
+3. 重新打开终端
+4. 或改用 npx 方式运行命令
 
 ### 可用命令
 
 ```bash
 # 初始化项目
-npx treeskit init
+treeskit init    # 或 npx treeskit init
 
 # 生成文档
-npx treeskit generate [--output <path>]
+treeskit generate [--output <path>]    # 或 npx treeskit generate
 
 # 配置管理
-npx treeskit config
+treeskit config    # 或 npx treeskit config
 
 # Git Hooks管理
-npx treeskit hooks <enable|disable|status>
+treeskit hooks <enable|disable|status>    # 或 npx treeskit hooks
 ```
 
 ### 命令详细说明
@@ -218,21 +253,53 @@ Error: Git Hooks配置失败，请检查权限
 
 ## 常见问题
 
-1. **找不到tree命令**
+1. **生成文档失败：tree command not found**
    ```bash
-   # macOS安装tree
+   # 错误信息
+   /bin/sh: tree: Command not found
+   生成文档失败: Command failed: tree -L 3 -I "node_modules|.git|build|DerivedData"
+   
+   # 解决方案：
+   # 1. 在 macOS 上安装
    brew install tree
    
-   # Linux安装tree
+   # 2. 在 Linux 上安装
    sudo apt-get install tree  # Ubuntu/Debian
    sudo yum install tree      # CentOS/RHEL
+   
+   # 3. 安装后验证
+   tree --version
+   
+   # 4. 验证成功后重新运行
+   treeskit generate
    ```
 
-2. **配置文件不存在**
+2. **命令未找到 (command not found: treeskit)**
+   ```bash
+   # 解决方案 1：使用 npx 方式运行（推荐新手）
+   npx treeskit <命令>
+   
+   # 解决方案 2：全局安装（推荐经常使用）
+   npm install -g treeskit
+   
+   # 如果全局安装后仍然报错，请检查：
+   # 1. 检查安装是否成功
+   npm list -g treeskit
+   
+   # 2. 检查 npm 全局路径
+   npm config get prefix
+   
+   # 3. 确认该路径在 PATH 中
+   echo $PATH
+   
+   # 4. 重启终端后重试
+   ```
+
+3. **配置文件不存在**
    - 确保先运行 `npx treeskit init`
    - 检查是否在正确的项目目录中
 
-3. **Git Hooks不生效**
+4. **Git Hooks不生效**
    - 确保项目是Git仓库
    - 检查是否存在其他 Git Hooks 管理工具（如 husky）：
      ```bash

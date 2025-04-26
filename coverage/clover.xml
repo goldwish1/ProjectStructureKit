@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1745569687255" clover="3.2.0">
-  <project timestamp="1745569687255" name="All files">
+<coverage generated="1745635361514" clover="3.2.0">
+  <project timestamp="1745635361514" name="All files">
     <metrics statements="95" coveredstatements="89" conditionals="24" coveredconditionals="23" methods="15" coveredmethods="14" elements="134" coveredelements="126" complexity="0" loc="95" ncloc="95" packages="2" files="2" classes="2"/>
     <package name="commands">
       <metrics statements="42" coveredstatements="42" conditionals="14" coveredconditionals="14" methods="3" coveredmethods="3"/>
-      <file name="hooks.js" path="/Users/yuanzhou.feng/Desktop/Kits/ProjectStructureKit/src/commands/hooks.js">
+      <file name="hooks.js" path="/Users/fengyuanzhou/Desktop/ProjectStructureKit/src/commands/hooks.js">
         <metrics statements="42" coveredstatements="42" conditionals="14" coveredconditionals="14" methods="3" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -52,7 +52,7 @@
     </package>
     <package name="utils">
       <metrics statements="53" coveredstatements="47" conditionals="10" coveredconditionals="9" methods="12" coveredmethods="11"/>
-      <file name="GitHooksManager.js" path="/Users/yuanzhou.feng/Desktop/Kits/ProjectStructureKit/src/utils/GitHooksManager.js">
+      <file name="GitHooksManager.js" path="/Users/fengyuanzhou/Desktop/ProjectStructureKit/src/utils/GitHooksManager.js">
         <metrics statements="53" coveredstatements="47" conditionals="10" coveredconditionals="9" methods="12" coveredmethods="11"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
